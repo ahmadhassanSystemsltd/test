@@ -1,5 +1,4 @@
-#heelo 
+#hello 
 
-print "hello world";
 
 
