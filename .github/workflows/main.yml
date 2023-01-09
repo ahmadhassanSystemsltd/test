@@ -1,9 +1,13 @@
-- name: Delete merged branch
-  # You may pin to the exact commit or the version.
-  # uses: SvanBoxel/delete-merged-branch@66b49c53552e882a0a11a3543840a22dcd300bfa
-  uses: SvanBoxel/delete-merged-branch@1.4.2
-  with:
-    # list of branches that should not be automatically deleted after a merge. Wildcards supported.
-    exclude: # optional
-    # whether or not a branch should be deleted if PR is closed without merging
-    delete_closed_pr: # optional
+name: delete branch on close pr
+on: 
+  pull_request:
+    types: [closed]
+  
+jobs:
+  delete-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: delete branch
+        uses: SvanBoxel/delete-merged-branch@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
